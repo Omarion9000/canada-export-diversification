@@ -1,0 +1,22 @@
+*.local.json
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Data: raw downloads are large and rebuilt by `make ingest`
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/MANIFEST.csv
+data/processed/*.duckdb
+data/processed/*.duckdb.wal
+
+# OS
+.DS_Store
+
+# Landing files are rebuilt by `make ingest` from data/raw
+data/processed/landing/

@@ -1,0 +1,15 @@
+statcan_name,country_code,note
+United States,US,Name in StatCan tables 12-10-0011/0171/0182; CIMT name is United States of America
+South Korea,KR,"CIMT name is ""Korea, South"""
+North Korea,KP,"CIMT name is ""Korea, North"""
+Democratic Republic of the Congo,CD,"CIMT name is ""Congo, Democratic Republic of the"""
+Congo,CG,"CIMT name is ""Congo, Republic of the"""
+United Republic of Tanzania,TZ,"CIMT name is ""Tanzania, United Republic of"""
+North Macedonia,MK,"CIMT name is ""Macedonia, North"""
+Republic of Moldova,MD,"CIMT name is ""Moldova, Republic of"""
+British Virgin Islands,VG,"CIMT name is ""Virgin Islands, British"""
+Nauru,NR,CIMT name is Naoero
+Saint Helena,SH,"CIMT name is ""Saint Helena, Ascension and Tristan da Cunha"""
+East Timor,TL,CIMT name is Timor-Leste (code TL since 2003)
+Canada,CA,Code CA in CIMT country file
+Unknown or unspecified,ZX,Code ZX in CIMT country file

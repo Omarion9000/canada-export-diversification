@@ -1,0 +1,94 @@
+# Frozen project settings. Any change after 2026-11-06 must be logged in README ("Changes to frozen settings").
+
+data:
+  first_month: "2022-01"
+  # The latest month is read from the data; nothing here needs editing for a new release.
+  flow: domestic_exports
+  basis: customs
+  currency: CAD
+
+periods:
+  # Baseline values are calendar-month averages over the baseline years, summed over the
+  # 12 calendar months (approved at Gate 2, 2026-11-06). Front-loading months are left out,
+  # so November and December are averaged over fewer years; each calendar month counts once.
+  baseline_primary: {start: "2022-01", end: "2024-12"}
+  baseline_sensitivity: {start: "2023-01", end: "2024-12"}
+  # Front-loading window: flagged and excluded from both baseline and tariff period in headline comparisons.
+  frontload: {start: "2024-11", end: "2025-02"}
+  # Tariff period = the latest rolling 12 months that start no earlier than this month.
+  tariff_period_earliest_start: "2025-03"
+
+thresholds:
+  h2_max_share_of_headline: 0.50          # H2 confirmed if ex-gold-ex-energy decline <= 50% of headline (pp)
+  h3_offset_ratio_confirm_below: 0.25     # H3 confirmed if offset ratio < 0.25
+  h3_offset_ratio_reject_above: 0.75      # H3 rejected if > 0.75; 0.25-0.75 = partial
+  h4_band: 0.20                           # H4 confirmed if tariff-period count within +/-20% of baseline mean
+  m2_max_residual_share: 0.10             # use exact form if approximation residual > 10% of total
+  v1_tolerance_pct: 0.5
+  v2_max_gap_pp: 3.0
+  v3_tolerance_pct: 10.0
+  v6_log_change_pct: 1.0
+
+# M7 extensive margin. Frozen 2026-11-06 by the product owner.
+m7:
+  geography: non_us_countries
+  key: [hs6, country_iso3]
+  prior_12m_max_cad: 100000        # rolling 12-month sum ending 12 months earlier must be < this
+  current_12m_min_cad: 1000000     # rolling 12-month sum must be > this ...
+  sustain_month_ends: 3            # ... at 3 consecutive month-ends (the snapshot month and the 2 before it)
+  baseline_snapshots: ["2023-12", "2024-12"]
+
+gold:
+  hs4: ["7108"]
+energy:
+  hs2: ["27"]
+  crude_hs4: ["2709"]
+
+# Unit normalization applied in staging.
+unit_normalization:
+  # HS 2710 quantities switch from hectolitres (HLT) to litres (LTR) in January 2026.
+  - {hs4: "2710", from_unit: "HLT", to_unit: "LTR", factor: 100}
+
+# Sector groups and tariff scope at HS6.
+# tariff_scope: full = the whole HS6 is a covered article; partial = only some tariff lines,
+# only part of the value (metal content, non-US content), or a USMCA exemption; none = not covered.
+# HS6 lists marked "from_official_list" are parsed by src/ingest/tariff_scope.py from the cited Tier 1 files.
+sectors:
+  steel:
+    # Proclamation 9705 (83 FR 11625) definition of steel articles, HS6 ranges, inclusive.
+    full_hs6_ranges: [["720610", "721650"], ["721699", "730110"], ["730210", "730210"], ["730240", "730290"], ["730410", "730690"]]
+    # Remaining HS 7206-7229 and 7301-7326 lines: derivatives, covered on part of the lines or value.
+    partial_hs4_ranges: [["7206", "7229"], ["7301", "7326"]]
+    other_hs4_ranges: [["7201", "7205"]]   # pig iron, ferro-alloys, scrap, granules: outside Section 232
+  aluminum:
+    # Proclamation 9704 (83 FR 11619) definition of aluminum articles.
+    full_hs4: ["7601", "7604", "7605", "7606", "7607", "7608", "7609"]
+    partial_hs4: ["7610", "7614", "7615", "7616"]   # derivatives (CBP list, Mar 2025) and castings/forgings (7616.99)
+    other_hs4: ["7602", "7603", "7611", "7612", "7613"]   # not in the official lists: flagged at Gate 2
+  copper:
+    # Proclamation 10962 (90 FR 37727) annex. 7406-7413 semi-finished; 7415/7418/7419/8544 derivatives.
+    partial_hs6: from_official_list   # covered on copper content
+    sector_hs4: ["7406", "7407", "7408", "7409", "7410", "7411", "7412", "7413", "7415", "7418", "7419"]
+    other_hs4_ranges: [["7401", "7405"]]  # includes 7403 refined copper: not covered
+  autos:
+    # Proclamations 10908 and 10984; HS lists from CBP auto-parts and MHDV attachments.
+    # All "partial" because USMCA content rules exempt part of the value.
+    sector_hs2: ["87"]
+    partial_hs6: from_official_list
+  lumber:
+    # Proclamation 10976 annex (softwood timber and lumber) plus AD/CVD order on softwood lumber.
+    sector_hs6: from_official_list
+    full_hs4: ["4407"]   # softwood lumber lines within 4407 (4407.11-4407.19)
+  # Products on an official list outside the five sectors keep sector_group "other" with tariff_scope partial.
+  # H3 comparison group "no sector-specific tariff" uses only tariff_scope = none.
+
+# H3: each sector's tariff period starts at its own first event (first full month on or after the event date).
+h3_sector_start:
+  steel: "2025-03-12"
+  aluminum: "2025-03-12"
+  autos: "2025-04-03"
+  copper: "2025-08-01"
+  lumber: "2025-10-14"
+
+# Destination groups aligned to StatCan Principal Trading Partners (12-10-0011-01).
+destination_groups: ["United States", "European Union", "United Kingdom", "China", "Japan", "Mexico", "South Korea", "Rest of world"]
