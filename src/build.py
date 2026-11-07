@@ -103,6 +103,7 @@ def landing_views(con: duckdb.DuckDBPyConnection) -> None:
     view("raw_dom_hs6", cimt / "dom_hs6_*.csv")
     view("raw_tot_hs2", cimt / "tot_hs2_*.csv")
     view("raw_hs6_desc", cimt / "hs6_desc.csv")
+    view("raw_hs2_desc", cimt / "hs2_desc.csv")
     view("raw_country_desc", cimt / "country_desc.csv")
     view("raw_wds_0011", LANDING / "statcan_12100011.csv")
     view("raw_wds_0171", LANDING / "statcan_12100171.csv")

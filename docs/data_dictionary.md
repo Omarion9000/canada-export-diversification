@@ -23,9 +23,9 @@ Columns: `country_code` (varchar), `country_iso3` (varchar), `name` (varchar), `
 
 **Grain:** HS6.
 
-`sector_group`: steel, aluminum, copper, autos, lumber (the five tariffed sectors), gold (HS 7108), energy (HS 27), other. Rules in config/settings.yaml (`sectors`). `is_tariffed` = one of the five sectors. `is_steel_primary` / `is_aluminum_primary` = Proclamation 9705 / 9704 definitions. Description from the StatCan HS6 file.
+`sector_group`: steel, aluminum, copper, autos, lumber (the five tariffed sectors), gold (HS 7108), energy (HS 27), other. Rules in config/settings.yaml (`sectors`). `is_tariffed` = one of the five sectors. `is_steel_primary` / `is_aluminum_primary` = Proclamation 9705 / 9704 definitions. Description from the StatCan HS6 file; `hs2_description` from the StatCan HS2 file (ODPF_5_HS2Desc).
 
-Columns: `hs6` (varchar), `hs4` (varchar), `hs2` (varchar), `description` (varchar), `default_unit` (varchar), `sector_group` (varchar), `is_gold` (boolean), `is_energy` (boolean), `is_crude` (boolean), `is_steel_primary` (boolean), `is_aluminum_primary` (boolean), `is_softwood_lumber` (boolean), `is_tariffed` (boolean)
+Columns: `hs6` (varchar), `hs4` (varchar), `hs2` (varchar), `description` (varchar), `hs2_description` (varchar), `default_unit` (varchar), `sector_group` (varchar), `is_gold` (boolean), `is_energy` (boolean), `is_crude` (boolean), `is_steel_primary` (boolean), `is_aluminum_primary` (boolean), `is_softwood_lumber` (boolean), `is_tariffed` (boolean)
 
 ## dim_month
 
@@ -143,7 +143,7 @@ Columns: `baseline` (varchar), `window_of_sector` (varchar), `group_variant` (va
 
 **Grain:** snapshot × variant.
 
-M7 (H4). Number of new HS6 × non-US country pairs at each snapshot. `role` baseline or tariff.
+M7 (H4). Number of new HS6 × non-US country pairs at each snapshot. `role`: baseline, tariff (latest month) or post_hoc (latest December, context only).
 
 Columns: `snapshot` (date), `role` (varchar), `variant` (varchar), `n_new_pairs` (bigint)
 
@@ -154,6 +154,30 @@ Columns: `snapshot` (date), `role` (varchar), `variant` (varchar), `n_new_pairs`
 M7 detail: the pairs counted as new, with their prior and current rolling 12-month sums.
 
 Columns: `snapshot` (date), `role` (varchar), `hs6` (varchar), `country_code` (varchar), `is_gold` (boolean), `is_energy` (boolean), `prior_r12` (double), `r12` (double), `min_r12_last3` (double)
+
+## mart_extensive_margin_test
+
+**Grain:** baseline × variant.
+
+H4 test inputs (frozen rule). Both baselines use the frozen baseline snapshots (Dec 2023 and Dec 2024). `change_vs_baseline` = latest count ÷ baseline mean − 1.
+
+Columns: `baseline` (varchar), `variant` (varchar), `baseline_snapshots` (varchar), `n_baseline_snapshots` (bigint), `baseline_mean` (double), `tariff_snapshot` (date), `tariff_count` (bigint), `change_vs_baseline` (double)
+
+## mart_extensive_margin_context
+
+**Grain:** kind × variant.
+
+Context for H4, never a verdict. `exploratory`: latest count vs the Dec 2024 snapshot alone (defined after seeing the result). `post_hoc`: count at the latest December (same calendar month as the baseline snapshots) vs the frozen baseline mean.
+
+Columns: `kind` (varchar), `description` (varchar), `reference_label` (varchar), `variant` (varchar), `snapshot` (date), `n_new_pairs` (bigint), `reference` (double), `change_vs_reference` (double)
+
+## mart_extensive_margin_by_group
+
+**Grain:** snapshot × dimension (country or HS2) × code.
+
+Where the new pairs are: count of new pairs by destination country and by HS2 chapter at each snapshot, the count without gold and energy, the number of gold pairs (HS 7108) and of chapter 71 pairs, the baseline mean for the same country or chapter, the change against that mean, and the rank within the snapshot (ties share a rank).
+
+Columns: `snapshot` (date), `role` (varchar), `dimension` (varchar), `code` (varchar), `label` (varchar), `n_new_pairs` (bigint), `n_new_pairs_ex_gold_ex_energy` (bigint), `n_gold` (bigint), `n_hs2_71` (bigint), `baseline_mean` (double), `change_vs_baseline_mean` (double), `rank_in_snapshot` (bigint)
 
 ## mart_frontload_check
 

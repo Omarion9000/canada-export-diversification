@@ -90,5 +90,17 @@ h3_sector_start:
   copper: "2025-08-01"
   lumber: "2025-10-14"
 
+# Short HS2 chapter names, used only as chart and README labels for the chapters with the most
+# new export pairs (H4). Full names come from Statistics Canada's HS2 descriptions (ODPF_5_HS2Desc);
+# each short name keeps the core of that description. A top chapter without a short name stops
+# the figures step, so this list must be extended when the ranking changes.
+hs2_short_names:
+  "71": "Precious metals and stones"   # Natural or cultured pearls, precious or semi-precious stones, precious metals...; includes gold (7108)
+  "84": "Machinery"                    # Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof
+  "85": "Electrical equipment"         # Electrical machinery and equipment and parts thereof; sound and TV equipment
+  "87": "Vehicles and parts"           # Vehicles other than railway or tramway rolling stock, and parts and accessories
+  "88": "Aircraft"                     # Aircraft, spacecraft, and parts thereof
+  "90": "Precision instruments"        # Optical, photographic, measuring, checking, precision, medical or surgical instruments
+
 # Destination groups aligned to StatCan Principal Trading Partners (12-10-0011-01).
 destination_groups: ["United States", "European Union", "United Kingdom", "China", "Japan", "Mexico", "South Korea", "Rest of world"]

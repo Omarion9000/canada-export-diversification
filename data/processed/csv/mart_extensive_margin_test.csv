@@ -1,0 +1,7 @@
+baseline,variant,baseline_snapshots,n_baseline_snapshots,baseline_mean,tariff_snapshot,tariff_count,change_vs_baseline
+primary,ex_gold,"Dec 2023, Dec 2024",2,505.0,2026-09-01,599,0.18613861386138608
+primary,ex_gold_ex_energy,"Dec 2023, Dec 2024",2,495.5,2026-09-01,592,0.19475277497477306
+primary,total,"Dec 2023, Dec 2024",2,505.5,2026-09-01,605,0.19683481701285865
+sensitivity,ex_gold,"Dec 2023, Dec 2024",2,505.0,2026-09-01,599,0.18613861386138608
+sensitivity,ex_gold_ex_energy,"Dec 2023, Dec 2024",2,495.5,2026-09-01,592,0.19475277497477306
+sensitivity,total,"Dec 2023, Dec 2024",2,505.5,2026-09-01,605,0.19683481701285865

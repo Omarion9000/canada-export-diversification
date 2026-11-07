@@ -82,6 +82,12 @@ descriptions as (
     from raw_hs6_desc
     qualify row_number() over (partition by code order by end_yyyymm desc, start_yyyymm desc) = 1
 ),
+hs2_names as (
+    -- StatCan HS2 chapter names (ODPF_5_HS2Desc), latest version of each chapter.
+    select code as hs2, name as hs2_description
+    from raw_hs2_desc
+    qualify row_number() over (partition by code order by end_yyyymm desc, start_yyyymm desc) = 1
+),
 rule_hits as (
     select c.hs6, r.sector_group, r.role
     from codes c
@@ -124,6 +130,7 @@ select
     substr(c.hs6, 1, 4) as hs4,
     substr(c.hs6, 1, 2) as hs2,
     d.description,
+    n.hs2_description,
     d.default_unit,
     case
         when c.is_gold then 'gold'
@@ -141,7 +148,12 @@ select
     c.is_aluminum_primary,
     c.is_softwood_lumber
 from classified c
-left join descriptions d using (hs6);
+left join descriptions d using (hs6)
+left join hs2_names n on n.hs2 = substr(c.hs6, 1, 2);
+
+select case when count(*) > 0 then error('HS2 chapters without a StatCan name: '
+                                         || string_agg(distinct hs2, ', ')) end
+from dim_product where hs2_description is null;
 
 alter table dim_product add column is_tariffed boolean;
 update dim_product

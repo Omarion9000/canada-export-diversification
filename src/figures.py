@@ -4,6 +4,8 @@ Style: titles state the finding, a source line sits under each chart, axes carry
 colors come from a palette checked for colour-blind safety (blue #2a78d6, orange #eb6834).
 """
 
+import textwrap
+
 import matplotlib
 
 matplotlib.use("Agg")
@@ -12,7 +14,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.ticker import FuncFormatter  # noqa: E402
 
 from src import analysis  # noqa: E402
-from src.common import ROOT  # noqa: E402
+from src.common import ROOT, load_settings  # noqa: E402
 
 FIGURES = ROOT / "figures"
 DPI = 200
@@ -358,6 +360,461 @@ def price_volume_chart(con, baseline: str = "primary") -> str:
     return "m4_price_volume.png"
 
 
+def names(items: list[str]) -> str:
+    """'a', 'a and b', 'a, b and c'."""
+    return items[0] if len(items) == 1 else ", ".join(items[:-1]) + " and " + items[-1]
+
+
+def h3_chart(con) -> str:
+    """M6/H3: offset ratio by tariffed sector, and % changes next to the comparison group."""
+    t = load_settings()["thresholds"]
+    lo, hi = t["h3_offset_ratio_confirm_below"], t["h3_offset_ratio_reject_above"]
+    prim = analysis.h3(con, "primary")
+    sens = {r["sector_group"]: r for r in analysis.h3(con, "sensitivity")}
+    group = analysis.no_sector_tariff(con, "primary", "steel", "ex_gold_ex_energy")
+
+    plt.rcParams["font.family"] = ["Helvetica", "Arial", "DejaVu Sans"]
+    fig, (ax1, ax2) = plt.subplots(
+        1, 2, figsize=(11, 6.4), dpi=DPI, gridspec_kw={"width_ratios": [1, 1.25]}
+    )
+    fig.patch.set_facecolor(SURFACE)
+    fig.subplots_adjust(top=0.81, bottom=0.28, left=0.12, right=0.97, wspace=0.42)
+    for ax in (ax1, ax2):
+        style(ax)
+        ax.grid(axis="y", visible=False)
+        ax.grid(axis="x", color=GRID, linewidth=0.6)
+        ax.tick_params(axis="y", length=0)
+
+    # Left: offset ratio, primary bars and sensitivity markers, with the frozen zones.
+    n = len(prim)
+    ys = list(range(n - 1, -1, -1))
+    ax1.axvspan(-0.25, lo, color="#f1f0eb", zorder=0)
+    ax1.axvspan(hi, 1.25, color="#f1f0eb", zorder=0)
+    for x, text in [
+        ((-0.25 + lo) / 2, "Not redirected\n(< 0.25)"),
+        ((lo + hi) / 2, "Partial"),
+        ((hi + 1.25) / 2, "Redirected\n(> 0.75)"),
+    ]:
+        ax1.text(x, n - 0.35, text, ha="center", va="bottom", fontsize=8.5, color=INK_2)
+    for y, r in zip(ys, prim, strict=True):
+        v = r["offset_ratio"]
+        ax1.barh(
+            y, v, 0.42, color=LEVEL, zorder=2, label="Baseline 2022–2024" if y == ys[0] else None
+        )
+        s_v = sens[r["sector_group"]]["offset_ratio"]
+        ax1.plot(
+            s_v,
+            y,
+            "o",
+            ms=7,
+            mfc=SURFACE,
+            mec=INK,
+            mew=1.4,
+            zorder=3,
+            label="Baseline 2023–2024" if y == ys[0] else None,
+        )
+        ax1.text(
+            max(v, s_v, 0) + 0.04,
+            y,
+            f"{signed(v, 2)}  (H3 {r['verdict']})",
+            ha="left",
+            va="center",
+            fontsize=8.5,
+            color=INK,
+        )
+    ax1.set_yticks(ys, [r["label"] for r in prim], fontsize=9.5, color=INK)
+    ax1.axvline(0, color=AXIS, lw=0.8)
+    ax1.set_xlim(-0.25, 1.25)
+    ax1.set_ylim(-0.6, n + 0.25)
+    ax1.set_xlabel("Offset ratio: non-US gain ÷ US loss", fontsize=9, color=INK_2)
+    ax1.legend(
+        loc="upper left",
+        bbox_to_anchor=(-0.02, -0.13),
+        frameon=False,
+        fontsize=8.5,
+        ncol=2,
+        handlelength=1.2,
+    )
+
+    # Right: % change toward the US and toward other countries, plus the comparison group.
+    cap = 100
+    rows = [(r["label"], r["d_us_pct"], r["d_nonus_pct"]) for r in prim]
+    rows.append(
+        ("No sector-specific\ntariff (comparison)", group["d_us_pct"], group["d_nonus_pct"])
+    )
+    m = len(rows)
+    ys2 = [m - i - (0.5 if i == m - 1 else 0) for i in range(m)]
+    h = 0.32
+    for y, (_label, us, row) in zip(ys2, rows, strict=True):
+        for off, value, color, name in [
+            (h / 2 + 0.02, 100 * us, BLUE, "To the US"),
+            (-h / 2 - 0.02, 100 * row, ORANGE, "To other countries"),
+        ]:
+            shown = min(value, cap)
+            ax2.barh(y + off, shown, h, color=color, zorder=2, label=name if y == ys2[0] else None)
+            text = f"{signed(value, 0)}%" + (" (bar cut)" if value > cap else "")
+            ax2.text(
+                shown + (2.5 if value >= 0 else -2.5),
+                y + off,
+                text,
+                ha="left" if value >= 0 else "right",
+                va="center",
+                fontsize=8.5,
+                color=INK,
+            )
+    ax2.axhline((ys2[-2] + ys2[-1]) / 2, color=AXIS, lw=0.8, ls=(0, (3, 3)))
+    ax2.set_yticks(ys2, [r[0] for r in rows], fontsize=9.5, color=INK)
+    ax2.axvline(0, color=AXIS, lw=0.8)
+    ax2.set_xlim(-125, 150)
+    ax2.xaxis.set_major_formatter(FuncFormatter(pct))
+    ax2.set_xlabel("Change in exports vs baseline (%)", fontsize=9, color=INK_2)
+    ax2.legend(
+        loc="upper left",
+        bbox_to_anchor=(-0.02, -0.13),
+        frameon=False,
+        fontsize=8.5,
+        ncol=2,
+        handlelength=1.2,
+    )
+
+    short = {"autos": "autos", "lumber": "lumber"}
+    by_verdict = {}
+    for r in prim:
+        by_verdict.setdefault(r["verdict"], []).append(r)
+    parts = []
+    for r in by_verdict.get("rejected", []):
+        parts.append(f"{r['label']} redirected {r['offset_ratio']:.0%} of its US loss")
+    if "confirmed" in by_verdict:
+        sectors = [
+            short.get(r["sector_group"], r["label"].lower()) for r in by_verdict["confirmed"]
+        ]
+        parts.append(f"{names(sectors)} did not redirect")
+    title = "; ".join(parts)
+    title = title[0].upper() + title[1:]
+    subtitle = (
+        f"Products with no sector-specific tariff changed {signed(100 * group['d_us_pct'])}% "
+        f"to the US and {signed(100 * group['d_nonus_pct'])}% elsewhere: the fall in US sales "
+        f"is concentrated in the tariffed sectors."
+    )
+    lumber = next(r for r in prim if r["sector_group"] == "lumber")
+    amounts = "; ".join(
+        f"{r['label'].lower()} CAD {r['x_nonus_base'] / 1e9:.1f} bn → "
+        f"{r['x_nonus_tariff'] / 1e9:.1f} bn"
+        for r in prim
+        if r["sector_group"] in ("copper", "aluminum")
+    )
+    footer = (
+        "Offset ratio = gain in exports to other countries ÷ loss in exports to the US, latest "
+        "window vs baseline 2022–2024. Frozen rule: H3 confirmed below "
+        f"{lo}, rejected above {hi}.\n"
+        f"Exports to other countries, baseline → latest window: {amounts}. Large % changes "
+        "start from small bases.\n"
+        "Each window starts in the first full month after the sector's first US tariff and is "
+        f"the latest 12 months; softwood lumber has {lumber['n_months']} months "
+        f"({lumber['window_start']:%b %Y}–{lumber['window_end']:%b %Y}), same calendar months "
+        "in the baseline.\n"
+        "Comparison group: products outside the five sectors with no sector-specific US tariff "
+        "that month, without gold and energy (Oct 2025–Sep 2026).\n" + source_line(con)
+    )
+    fig.text(0.02, 0.965, title, ha="left", va="top", fontsize=13.5, weight="bold", color=INK)
+    fig.text(0.02, 0.905, subtitle, ha="left", va="top", fontsize=10, color=INK_2, wrap=True)
+    fig.text(
+        0.02, 0.02, footer, ha="left", va="bottom", fontsize=8.2, color=MUTED, linespacing=1.45
+    )
+    fig.savefig(FIGURES / "h3_redirection.png", dpi=DPI, facecolor=SURFACE)
+    plt.close(fig)
+    return "h3_redirection.png"
+
+
+def h4_chart(con) -> str:
+    """M7/H4: new non-US pairs at each frozen snapshot against the frozen band."""
+    rows = analysis.records(
+        con,
+        "select snapshot, role, n_new_pairs from mart_extensive_margin "
+        "where variant = 'total' and role in ('baseline', 'tariff') order by snapshot",
+    )
+    prim = analysis.h4(con, "primary")[0]
+    sens = analysis.h4(con, "sensitivity")[0]
+    explo = analysis.h4_context(con, "exploratory")
+    post = analysis.h4_context(con, "post_hoc")
+    fig, ax = new_figure(width=10.0, height=5.8)
+    fig.subplots_adjust(top=0.80, bottom=0.31, left=0.09, right=0.74)
+    ax.axhspan(prim["low"], prim["high"], color="#f1f0eb", zorder=0)
+    ax.axhline(prim["baseline_mean"], color=MUTED, lw=0.8, ls=(0, (3, 3)), zorder=1)
+    for i, r in enumerate(rows):
+        color = ORANGE if r["role"] == "tariff" else LEVEL
+        ax.bar(i, r["n_new_pairs"], 0.45, color=color, zorder=2)
+        ax.text(
+            i,
+            r["n_new_pairs"] + 8,
+            f"{r['n_new_pairs']}",
+            ha="center",
+            va="bottom",
+            fontsize=10,
+            color=INK,
+            weight="bold",
+        )
+    labels = [
+        f"{r['snapshot']:%b %Y}\n" + ("baseline" if r["role"] == "baseline" else "latest month")
+        for r in rows
+    ]
+    ax.set_xticks(range(len(rows)), labels, fontsize=9, color=INK_2)
+    ax.tick_params(axis="x", length=0)
+    ax.set_xlim(-0.6, len(rows) - 0.4)
+    ax.set_ylim(0, 720)
+    ax.set_ylabel("New product × country pairs outside the US (count)", fontsize=9, color=INK_2)
+    right = ax.get_yaxis_transform()
+    for y, text, va in [
+        (prim["high"], f"Upper limit: {prim['high']:.1f}", "bottom"),
+        (prim["baseline_mean"], f"Baseline mean: {prim['baseline_mean']:.1f}", "center"),
+        (prim["low"], f"Lower limit: {prim['low']:.1f}", "bottom"),
+    ]:
+        ax.text(1.01, y, text, transform=right, fontsize=8.5, color=INK_2, va=va)
+    title = (
+        f"New export pairs outside the US reached {prim['tariff_count']}, at the edge of the "
+        f"frozen band ({prim['high']:.0f})"
+    )
+    same = prim["verdict"] == sens["verdict"]
+    subtitle = (
+        f"{signed(100 * prim['change_vs_baseline'])}% vs the baseline mean of Dec 2023 and "
+        f"Dec 2024 (both baselines). H4 {prim['verdict']} by the frozen rule"
+        + (", the same with both baselines." if same else "; the verdict differs by baseline.")
+    )
+    notes = []
+    if explo:
+        notes.append(
+            f"Exploratory, defined after seeing the result (not a verdict): vs the "
+            f"{explo['reference_label']} alone ({explo['reference']:.0f}), the latest count is "
+            f"{signed(100 * explo['change_vs_reference'])}%."
+        )
+    if post:
+        notes.append(
+            f"Post hoc context: {post['n_new_pairs']} new pairs in {post['snapshot']:%b %Y}, the "
+            f"same calendar month as the baseline snapshots "
+            f"({signed(100 * post['change_vs_reference'])}% vs the baseline mean)."
+        )
+    footer = (
+        "New pair: an HS6 product × non-US country with under CAD 100,000 in the prior 12 "
+        "months and over CAD 1 million in the latest 12 months,\nat 3 consecutive month-ends. "
+        "Shaded band: baseline mean ± 20% (frozen rule). The latest month's prior 12 months "
+        "include\nthe front-loading months (Nov 2024–Feb 2025), which can make fewer pairs look "
+        "new. All goods.\n" + "\n".join(notes) + "\n" + source_line(con)
+    )
+    finish(fig, ax, title, subtitle, footer, "h4_new_pairs.png")
+    return "h4_new_pairs.png"
+
+
+def wrap_label(text: str, width: int = 34, lines: int = 2) -> str:
+    out = textwrap.wrap(text, width)
+    if len(out) > lines:
+        out = out[:lines]
+        out[-1] = out[-1].rstrip(",;") + "…"
+    return "\n".join(out)
+
+
+def h4_where_chart(con) -> str:
+    """Where the new pairs are: top destination countries and HS2 chapters (ties kept)."""
+    countries = analysis.h4_top(con, "country")
+    chapters = analysis.h4_top(con, "hs2")
+    plt.rcParams["font.family"] = ["Helvetica", "Arial", "DejaVu Sans"]
+    fig, (ax1, ax2) = plt.subplots(
+        1, 2, figsize=(11, 6.2), dpi=DPI, gridspec_kw={"width_ratios": [1, 1.25]}
+    )
+    fig.patch.set_facecolor(SURFACE)
+    fig.subplots_adjust(top=0.78, bottom=0.23, left=0.13, right=0.97, wspace=0.45)
+    for ax, rows, label_of, head in [
+        (ax1, countries, lambda r: r["label"], "Destination country"),
+        (ax2, chapters, lambda r: f"{r['code']} {analysis.hs2_short(r['code'])}", "HS2 chapter"),
+    ]:
+        style(ax)
+        ax.grid(axis="y", visible=False)
+        ax.grid(axis="x", color=GRID, linewidth=0.6)
+        ax.tick_params(axis="y", length=0)
+        ys = list(range(len(rows) - 1, -1, -1))
+        xmax = max(max(r["n_new_pairs"], r["baseline_mean"]) for r in rows) * 1.15
+        for y, r in zip(ys, rows, strict=True):
+            ax.barh(
+                y,
+                r["n_new_pairs"],
+                0.55,
+                color=ORANGE,
+                zorder=2,
+                label="Latest month (Sep 2026)" if y == ys[0] else None,
+            )
+            ax.plot(
+                r["baseline_mean"],
+                y,
+                "D",
+                ms=6,
+                color=INK,
+                mec=SURFACE,
+                mew=1.2,
+                zorder=3,
+                label="Baseline mean (Dec 2023, Dec 2024)" if y == ys[0] else None,
+            )
+            ax.text(
+                max(r["n_new_pairs"], r["baseline_mean"]) + 0.05 * xmax,
+                y,
+                f"{r['n_new_pairs']}",
+                ha="left",
+                va="center",
+                fontsize=9,
+                color=INK,
+            )
+        ax.set_yticks(ys, [label_of(r) for r in rows], fontsize=8.8, color=INK)
+        ax.set_xlim(0, xmax)
+        ax.set_title(head, loc="left", fontsize=10, color=INK, weight="bold", pad=8)
+        ax.set_xlabel("New pairs (count)", fontsize=9, color=INK_2)
+    ax1.legend(
+        loc="upper left",
+        bbox_to_anchor=(-0.3, -0.11),
+        frameon=False,
+        fontsize=8.5,
+        ncol=2,
+        handlelength=1.2,
+    )
+    top_c, top_h = countries[0], chapters[0]
+    title = (
+        f"{top_c['label']} and {analysis.hs2_short(top_h['code']).lower()} "
+        f"(HS {top_h['code']}) have the most new export pairs outside the US"
+    )
+    subtitle = (
+        f"Top 5 destinations and top 5 HS2 chapters by new pairs in the latest 12 months "
+        f"(ties shown). {top_c['label']}: {top_c['n_new_pairs']} vs a baseline mean of "
+        f"{top_c['baseline_mean']:.1f}."
+    )
+    gold_note = ""
+    ch71 = next((r for r in chapters if r["code"] == "71"), None)
+    if ch71:
+        gold_note = (
+            f" Chapter 71 includes gold (HS 7108): "
+            f"{ch71['n_new_pairs'] - ch71['n_new_pairs_ex_gold_ex_energy']} of its "
+            f"{ch71['n_new_pairs']} new pairs are gold."
+        )
+    footer = (
+        "New pair: an HS6 product × non-US country with under CAD 100,000 in the prior 12 months "
+        "and over CAD 1 million in the latest 12 months, at 3 consecutive\nmonth-ends. All goods. "
+        "Short chapter names are mapped in config/settings.yaml (hs2_short_names) from Statistics "
+        "Canada's HS2 descriptions.\n" + gold_note.strip() + "\n" + source_line(con)
+    )
+    fig.text(0.02, 0.965, title, ha="left", va="top", fontsize=13.5, weight="bold", color=INK)
+    fig.text(0.02, 0.905, subtitle, ha="left", va="top", fontsize=10, color=INK_2)
+    fig.text(
+        0.02, 0.02, footer, ha="left", va="bottom", fontsize=8.2, color=MUTED, linespacing=1.45
+    )
+    fig.savefig(FIGURES / "h4_where_new_pairs.png", dpi=DPI, facecolor=SURFACE)
+    plt.close(fig)
+    return "h4_where_new_pairs.png"
+
+
+SECTOR_LABELS = {
+    "steel": "Steel",
+    "aluminum": "Aluminum",
+    "copper": "Copper",
+    "autos": "Autos and parts",
+    "lumber": "Softwood lumber",
+    "energy": "Energy (HS 27)",
+    "gold": "Gold (HS 7108)",
+    "other": "All other goods",
+}
+
+
+def exposure_chart(con) -> str:
+    """M8: US dependence by sector, baseline vs latest 12 months (dumbbell)."""
+    rows = analysis.exposure(con, "primary")
+    fig, ax = new_figure(width=9.5, height=6.2)
+    ax.grid(axis="y", visible=False)
+    ax.grid(axis="x", color=GRID, linewidth=0.6)
+    ax.tick_params(axis="y", length=0)
+    fig.subplots_adjust(top=0.79, bottom=0.22, left=0.19, right=0.95)
+    ys = list(range(len(rows) - 1, -1, -1))
+    for y, r in zip(ys, rows, strict=True):
+        b, latest = 100 * r["us_dependence_base"], 100 * r["us_dependence_latest"]
+        ax.plot([b, latest], [y, y], color=AXIS, lw=2, zorder=1, solid_capstyle="round")
+        ax.plot(
+            b,
+            y,
+            "o",
+            ms=7,
+            color=LEVEL,
+            mec=SURFACE,
+            mew=1.2,
+            zorder=2,
+            label="Baseline 2022–2024" if y == ys[0] else None,
+        )
+        ax.plot(
+            latest,
+            y,
+            "o",
+            ms=8,
+            color=BLUE,
+            mec=SURFACE,
+            mew=1.2,
+            zorder=3,
+            label="Latest 12 months" if y == ys[0] else None,
+        )
+        ax.text(
+            min(b, latest) - 2.2,
+            y,
+            f"{latest:.0f}%",
+            ha="right",
+            va="center",
+            fontsize=9,
+            color=INK,
+        )
+        ax.text(
+            max(b, latest) + 2.2,
+            y,
+            f"{signed(r['us_dependence_change_pp'])} pp",
+            ha="left",
+            va="center",
+            fontsize=8.5,
+            color=INK_2,
+        )
+    ax.set_yticks(
+        ys,
+        [
+            f"{SECTOR_LABELS[r['sector_group']]}\nCAD {r['x_sector_latest'] / 1e9:,.1f} bn"
+            for r in rows
+        ],
+        fontsize=9.2,
+        color=INK,
+    )
+    ax.set_xlim(-8, 112)
+    ax.xaxis.set_major_formatter(FuncFormatter(pct))
+    ax.set_xlabel(
+        "US dependence: exports to the US ÷ the sector's exports (%)", fontsize=9, color=INK_2
+    )
+    ax.legend(loc="lower left", bbox_to_anchor=(0, 1.0), frameon=False, fontsize=9, ncol=2)
+    top = [r for r in rows if r["is_tariffed_sector"]][:2]
+    drop = min(rows, key=lambda r: r["us_dependence_change_pp"])
+    title = (
+        names(
+            [
+                f"{SECTOR_LABELS[r['sector_group']].lower()} "
+                f"({100 * r['us_dependence_latest']:.0f}%)"
+                for r in top
+            ]
+        ).capitalize()
+        + f" still depend most on the US; {SECTOR_LABELS[drop['sector_group']].lower()} "
+        f"fell from {100 * drop['us_dependence_base']:.0f}% to "
+        f"{100 * drop['us_dependence_latest']:.0f}%"
+    )
+    subtitle = (
+        "Share of each sector's exports going to the US, 2022–2024 vs latest 12 months. "
+        f"{SECTOR_LABELS[drop['sector_group']]} is small: CAD "
+        f"{drop['x_sector_latest'] / 1e9:.1f} bn a year."
+    )
+    footer = (
+        "Baseline: each calendar month averaged over 2022–2024, without Nov 2024–Feb 2025. "
+        "Latest 12 months: Oct 2025–Sep 2026.\nUnder each sector name: its exports in the latest "
+        "12 months, CAD billions.\nSector groups follow the official US tariff lists (see "
+        "docs/methodology.md); gold and energy are shown as their own groups.\n" + source_line(con)
+    )
+    finish(fig, ax, title, subtitle, footer, "m8_exposure.png")
+    return "m8_exposure.png"
+
+
 def main() -> None:
     con = analysis.connect()
     for name in [
@@ -366,6 +823,10 @@ def main() -> None:
         us_share_chart(con),
         h1_chart(con, "primary"),
         price_volume_chart(con),
+        h3_chart(con),
+        h4_chart(con),
+        h4_where_chart(con),
+        exposure_chart(con),
     ]:
         print(f"  figures/{name}")
     con.close()

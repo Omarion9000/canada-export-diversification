@@ -19,7 +19,11 @@ FILES = {
     "Dom_Exp": ("ODPFN018_", "dom_hs6"),  # domestic exports, HS6 detail
     "Tot_Exp": ("ODPFN021_", "tot_hs2"),  # total exports, HS2 detail (only used for V1a)
 }
-DESCRIPTION_FILES = {"ODPF_4_HS6XDesc.TXT": "hs6_desc", "ODPF_6_CtyDesc.TXT": "country_desc"}
+DESCRIPTION_FILES = {
+    "ODPF_4_HS6XDesc.TXT": "hs6_desc",
+    "ODPF_5_HS2Desc.TXT": "hs2_desc",
+    "ODPF_6_CtyDesc.TXT": "country_desc",
+}
 
 
 def years(first_month: str) -> list[int]:
@@ -88,8 +92,8 @@ def write_description(text: str, kind: str, target: Path) -> None:
     """Convert a fixed-width StatCan description file to CSV.
 
     Layout: code [0:11], start YYYYMM [11:17], end YYYYMM [18:24], then for HS6 files a
-    3-letter unit at [25:28] and the English text at [29:112]; for country files the
-    English name at [25:108].
+    3-letter unit at [25:28] and the English text at [29:112]; for HS2 and country files the
+    English text at [25:108].
     """
 
 
@@ -107,7 +111,7 @@ def write_description(text: str, kind: str, target: Path) -> None:
             rows.append((code, start, end, unit, text_en))
         else:
             if line[107] != " ":
-                raise PipelineError(f"Country name overflows its column: {line[:40]!r}")
+                raise PipelineError(f"{kind} text overflows its column: {line[:40]!r}")
             rows.append((code, start, end, line[25:108].strip()))
     header = ["code", "start_yyyymm", "end_yyyymm"] + (
         ["unit", "description"] if kind == "hs6_desc" else ["name"]

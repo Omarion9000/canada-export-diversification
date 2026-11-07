@@ -46,6 +46,14 @@ The extensive margin counts new trade flows: an HS6 product sold to a non-US cou
 
 These counts were computed during the design phase from the 2022–2024 files only.
 
+**Both baselines use the frozen snapshots.** The H4 verdict uses the mean of the frozen baseline snapshots (December 2023 and December 2024) for both the 2022–2024 and the 2023–2024 baselines, as the frozen rule says. The two verdicts are therefore the same.
+
+**Context, not verdicts (`mart_extensive_margin_context`).**
+- *Exploratory, defined after seeing the result:* the latest count against the December 2024 snapshot alone (495 pairs). It was set at Gate 4 (2026-11-06), when the latest count was already known, so it is reported as context only.
+- *Post hoc robustness:* the count at the latest December (December 2025), the same calendar month as the baseline snapshots, against the frozen baseline mean. Context only; it does not change the verdict.
+
+**Where the new pairs are.** New pairs are also counted by destination country and by HS2 chapter (`mart_extensive_margin_by_group`). Chapter names are Statistics Canada's HS2 descriptions from the CIMT bulk files.
+
 **Note on a recon error.** During recon (2026-11-06), a threshold sensitivity table also computed annual counts for 2025 by mistake. Those 2025 counts were never reviewed or used to choose thresholds, and they are not reported anywhere. Counts for 2025–2026 are first computed in the analysis phase, after the thresholds were frozen.
 
 ## Baseline values

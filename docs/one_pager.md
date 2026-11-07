@@ -2,27 +2,18 @@
 
 Omar Serrano · Data Analyst · [GitHub] · [LinkedIn]
 
-**Data:** Statistics Canada, CIMT domestic exports (customs basis), January 2022–September 2026. Baseline 2022–2024 vs the latest 12 months (Oct 2025–Sep 2026).
+**Data:** Statistics Canada, CIMT domestic exports (customs basis), January 2022–September 2026. Baseline 2022–2024 vs the latest 12 months (Oct 2025–Sep 2026). Thresholds frozen before the analysis.
 
 ## Key findings
 
-1. **The US share changed −8.4 pp, from 76.2% to 67.8%.**
-2. **Gold −4.7 pp (56% of the drop),** energy −0.4 pp on average, everything else −3.3 pp (40%). Shares may not sum to 100% due to rounding.
-3. **Gold: mostly price.** 77% of the CAD 45.6 bn rise in gold exports to other countries is a price effect; the volume of gold to the US fell (volume effect CAD −6.5 bn, grams −66%).
-4. **Crude: mostly volume.** Crude oil exports to other countries rose by CAD 16.0 bn a year; 97% of that is a volume effect (CAD +15.5 bn). This coincides with the expanded Trans Mountain pipeline starting service on May 1, 2024, before the tariffs.
-5. **H2 Confirmed.** Without gold and energy, the drop is 39.5% of the headline (frozen threshold: at most 50%). With the 2023–2024 baseline it is 48.5% against the 50% threshold (confirmed; thin margin).
-6. **H1 Confirmed.** About 91% of the change is linked to faster growth in exports to other countries (CAD 171.5 bn → 251.9 bn a year, +46.9%). Exports to the US changed −3.6% (CAD 549.2 bn → 529.5 bn). Without gold and energy: 81% on the rest-of-world side (confirmed).
+1. **The US share changed −8.4 pp, from 76.2% to 67.8%:** gold −4.7 pp (56% of the drop), energy −0.4 pp, everything else −3.3 pp (40%). Shares may not sum to 100% due to rounding.
+2. **Gold is mostly price, crude mostly volume.** 77% of the CAD 45.6 bn rise in gold exports to other countries is price; gold grams to the US −66%. Crude to other countries rose CAD 16.0 bn, 97% volume, coinciding with the Trans Mountain expansion (in service May 1, 2024, before the tariffs).
+3. **H2 Confirmed.** Without gold and energy the drop is 39.5% of the headline (threshold 50%); 48.5% with the 2023–2024 baseline (confirmed; thin margin).
+4. **H1 Confirmed.** About 91% of the change is on the rest-of-world side (exports elsewhere +46.9%, to the US −3.6%); 81% without gold and energy, where the US share still fell 3.3 points.
+5. **H3: aluminum redirected; steel, autos and parts, and softwood lumber did not.** Offset ratio 0.84 for aluminum (84 cents gained elsewhere per US dollar lost); below 0.25 for steel, autos and parts, and softwood lumber; copper partial. Products with no sector-specific tariff: +8.5% to the US, so the fall in US sales is concentrated in the tariffed sectors.
+6. **H4.** Confirmed by the frozen rule, but at the edge (605 vs a limit of 607). The front-loading bias pushes the count down, so this result cannot rule out a moderate rise in new export pairs. Largest rises vs the baseline: the United Kingdom 19 vs 6.5 (1 gold), Spain 18 vs 7.0 (1 gold) and China 31 vs 21.5. HS 84 machinery has the most (176).
+7. **Exposure.** Autos and parts (92%) and steel (89%) depend most on the US; copper (CAD 1.4 bn a year) fell from 97% to 40%.
 
-![Waterfall of the change in the US share](../figures/h2_waterfall.png)
+<img src="../figures/h2_waterfall.png" alt="Waterfall of the change in the US share" width="75%">
 
-## How to read this
-
-- The US share can fall because exports to the US shrink or because exports elsewhere grow. Here it is mostly the second. Gold accounts for 57% of the growth in exports to other countries (CAD 45.6 bn of 80.4 bn).
-- Without gold and energy, the US share still fell 3.3 points, mostly on the rest-of-world side: exports to other countries changed +14.3%.
-- These are associations, not proof that the tariffs caused the change.
-
-## Method in one paragraph
-
-Shares use 12-month sums. The baseline averages each calendar month over 2022–2024 and leaves out the front-loading months (November 2024–February 2025). Gold (HS 7108) and energy (HS 27) effects are the average of two removal orders; the gold effect ranges from −5.4 to −4.1 pp between orders. Thresholds were frozen before the analysis. All checks against published Statistics Canada tables passed (data downloaded 2026-11-06).
-
-**Next:** product-level redirection in tariffed sectors (H3), new product–market pairs (H4) and a sector exposure table.
+**How to read this.** Most of the drop is linked to exports elsewhere growing, and gold is 57% of that growth. Outside gold, the clearest shifts are in aluminum and in new machinery pairs. Associations, not proof of cause. **Method:** 12-month sums; front-loading months (Nov 2024–Feb 2025) left out; gold and energy effects average two removal orders (gold −5.4 to −4.1 pp); validated against Statistics Canada tables (data of 2026-11-06).
