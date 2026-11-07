@@ -180,3 +180,8 @@ Raw downloads are listed with checksums in [data/raw/MANIFEST.csv](data/raw/MANI
 ## Sources
 
 Every source, with its tier, URL and access date: [docs/sources.md](docs/sources.md).
+
+## License
+
+- **Code:** MIT License, see [LICENSE](LICENSE).
+- **Data:** Statistics Canada data are used under the [Open Government Licence – Canada](https://open.canada.ca/en/open-government-licence-canada) (version 2.0). Source: Statistics Canada. The CSV files in `data/processed/csv/` are derived from these data. Other sources keep their own terms, listed in [docs/sources.md](docs/sources.md).

@@ -41,6 +41,10 @@ United Nations Statistics Division. (n.d.). *Standard country or area codes for 
 
 ## Official documents
 
+### Licences
+
+Government of Canada. (n.d.). *Open Government Licence – Canada* (Version 2.0). https://open.canada.ca/en/open-government-licence-canada (accessed 2026-11-06) **Tier 1.**
+
 ### Statistics Canada reference material
 
 Statistics Canada. (2021). *Canadian International Merchandise Trade Web Application* (Catalogue no. 71-607-X2021004). https://www150.statcan.gc.ca/n1/pub/71-607-x/71-607-x2021004-eng.htm (accessed 2026-11-06) **Tier 1.**
