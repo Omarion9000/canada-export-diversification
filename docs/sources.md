@@ -5,7 +5,7 @@ Sources are grouped by type. Entries are added as work progresses, not at the en
 
 Tier 1 sources (data and facts) are Statistics Canada, other Government of Canada departments, the Bank of Canada, the World Bank, UN Comtrade and US government primary documents. Tier 2 sources (bank research, IMF, OECD) are used for context and cross-checks only.
 
-Each entry ends with its tier. Tier 1 here covers Statistics Canada, Global Affairs Canada, the Bank of Canada, the World Bank, UN Comtrade, and US federal primary documents (Federal Register, White House, USTR, CBP bulletins and their attachments, the USITC tariff schedule, and NIST unit definitions). No Tier 2 source has been used so far. No news articles, blogs, aggregators, Wikipedia, law-firm notes or AI-generated text were used as sources.
+Each entry ends with its tier. Tier 1 here covers Statistics Canada, Global Affairs Canada, Trans Mountain Corporation (a federal Crown corporation), the Bank of Canada, the World Bank, UN Comtrade, and US federal primary documents (Federal Register, White House, USTR, CBP bulletins and their attachments, the USITC tariff schedule, and NIST unit definitions). No Tier 2 source has been used so far. No news articles, blogs, aggregators, Wikipedia, law-firm notes or AI-generated text were used as sources.
 
 ## Data sources
 
@@ -158,6 +158,8 @@ National Institute of Standards and Technology. (n.d.). *NIST Guide to the SI, A
 Global Affairs Canada. (2026, July 23). *Statement by Minister LeBlanc on the imposition by the U.S. of Section 301 tariffs related to forced labour practices*. https://www.canada.ca/en/global-affairs/news/2026/07/statement-by-minister-leblanc-on-the-imposition-by-the-us-of-section-301-tariffs-related-to-forced-labour-practices.html (accessed 2026-11-06) **Tier 1.**
 
 Global Affairs Canada. (n.d.). *Text of the Comprehensive Economic and Trade Agreement: Preamble* [List of EU member states party to CETA]. https://www.international.gc.ca/trade-commerce/trade-agreements-accords-commerciaux/agr-acc/ceta-aecg/text-texte/PRE.aspx?lang=eng (accessed 2026-11-06) **Tier 1.**
+
+Trans Mountain Corporation. (2025, May 8). *Trans Mountain Corporation management report: Three months ended March 31, 2025* [Federal Crown corporation report; states the May 1, 2024 commencement of service on the expanded system and the Canada Energy Regulator Leave to Open of April 30, 2024]. https://docs.transmountain.com/Corporate-Reports/TMC-03.31.25-Management-Report-Final.pdf (accessed 2026-11-06) **Tier 1.**
 
 ## Bank research
 

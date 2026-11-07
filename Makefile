@@ -1,8 +1,8 @@
 PY := .venv/bin/python
 
-.PHONY: all setup ingest staging validate marts figures exports test lint
+.PHONY: all setup ingest staging validate marts figures notebooks report exports test lint
 
-all: ingest validate marts figures exports
+all: ingest validate marts figures notebooks report exports
 
 setup:
 	python3.14 -m venv .venv
@@ -22,6 +22,13 @@ marts:
 
 figures:
 	$(PY) -m src.figures
+
+notebooks:
+	cd notebooks && ../$(PY) -m nbconvert --to notebook --execute --inplace \
+		01_h1_decomposition.ipynb 02_h2_gold_energy_waterfall.ipynb
+
+report:
+	$(PY) -m src.report
 
 exports:
 	$(PY) -m src.export
