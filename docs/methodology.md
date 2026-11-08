@@ -10,6 +10,7 @@ Settings and thresholds live in `config/settings.yaml` and were frozen on 2026-1
 - **Customs basis.** Values are recorded when goods cross the border, in Canadian dollars. Exports to the United States are measured with US import data under the Canada–US data exchange.
 - **Classification.** All months use HS2022. The HS (Harmonized System) is the world standard list of product codes; HS6 is its 6-digit level.
 - **Unit change.** For HS 2710 (refined petroleum), quantities switch from hectolitres to litres in January 2026. Staging converts hectolitres to litres (× 100) so the series is continuous.
+- **Vintage and reruns.** Each run downloads the sources again, but a new copy is kept only if its bytes differ from the latest saved copy. The vintage (download date) is therefore the date the current data were first downloaded, and a rerun on unchanged data gives identical outputs. Marts are built with one thread so float sums are identical between runs; CSV exports are sorted and rounded (10 decimals, at most 12 significant digits).
 
 ## Periods
 

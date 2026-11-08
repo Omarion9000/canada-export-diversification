@@ -1,225 +1,225 @@
 country_code,country_iso3,name,ptp_group,is_us
-FI,FIN,Finland,European Union,false
-KZ,KAZ,Kazakhstan,Rest of world,false
-ME,MNE,Montenegro,Rest of world,false
-LA,LAO,Laos,Rest of world,false
-MU,MUS,Mauritius,Rest of world,false
-UY,URY,Uruguay,Rest of world,false
-NI,NIC,Nicaragua,Rest of world,false
-MF,MAF,Saint Martin (French part),Rest of world,false
-ZM,ZMB,Zambia,Rest of world,false
-BQ,BES,"Bonaire, Sint Eustatius and Saba",Rest of world,false
-LS,LSO,Lesotho,Rest of world,false
-KP,PRK,"Korea, North",Rest of world,false
-KW,KWT,Kuwait,Rest of world,false
-LC,LCA,Saint Lucia,Rest of world,false
-LT,LTU,Lithuania,European Union,false
-DZ,DZA,Algeria,Rest of world,false
-GY,GUY,Guyana,Rest of world,false
-HU,HUN,Hungary,European Union,false
-NO,NOR,Norway,Rest of world,false
-SV,SLV,El Salvador,Rest of world,false
-TN,TUN,Tunisia,Rest of world,false
-KY,CYM,Cayman Islands,Rest of world,false
-MW,MWI,Malawi,Rest of world,false
-SD,SDN,Sudan,Rest of world,false
-SC,SYC,Seychelles,Rest of world,false
-MR,MRT,Mauritania,Rest of world,false
-AE,ARE,United Arab Emirates,Rest of world,false
-AO,AGO,Angola,Rest of world,false
-HK,HKG,Hong Kong,Rest of world,false
-JM,JAM,Jamaica,Rest of world,false
-TW,TWN,Taiwan,Rest of world,false
-BY,BLR,Belarus,Rest of world,false
-TH,THA,Thailand,Rest of world,false
-BM,BMU,Bermuda,Rest of world,false
-UZ,UZB,Uzbekistan,Rest of world,false
-BG,BGR,Bulgaria,European Union,false
-IE,IRL,Ireland,European Union,false
-CV,CPV,Cabo Verde,Rest of world,false
-MN,MNG,Mongolia,Rest of world,false
-LY,LBY,Libya,Rest of world,false
-TD,TCD,Chad,Rest of world,false
-SH,SHN,"Saint Helena, Ascension and Tristan da Cunha",Rest of world,false
-AR,ARG,Argentina,Rest of world,false
-HN,HND,Honduras,Rest of world,false
-SI,SVN,Slovenia,European Union,false
-CY,CYP,Cyprus,European Union,false
-JO,JOR,Jordan,Rest of world,false
-LV,LVA,Latvia,European Union,false
-ET,ETH,Ethiopia,Rest of world,false
-AM,ARM,Armenia,Rest of world,false
-BN,BRN,Brunei Darussalam,Rest of world,false
-MS,MSR,Montserrat,Rest of world,false
-FO,FRO,Faroe Islands,Rest of world,false
-CF,CAF,Central African Republic,Rest of world,false
 AD,AND,Andorra,Rest of world,false
-CC,CCK,Cocos (Keeling) Islands,Rest of world,false
-GB,GBR,United Kingdom,United Kingdom,false
-NL,NLD,Netherlands,European Union,false
-VN,VNM,Viet Nam,Rest of world,false
-GH,GHA,Ghana,Rest of world,false
-GQ,GNQ,Equatorial Guinea,Rest of world,false
-SE,SWE,Sweden,European Union,false
-EC,ECU,Ecuador,Rest of world,false
-ID,IDN,Indonesia,Rest of world,false
-BO,BOL,Bolivia,Rest of world,false
-LB,LBN,Lebanon,Rest of world,false
-LK,LKA,Sri Lanka,Rest of world,false
-MM,MMR,Myanmar,Rest of world,false
-SL,SLE,Sierra Leone,Rest of world,false
-BW,BWA,Botswana,Rest of world,false
-TZ,TZA,"Tanzania, United Republic of",Rest of world,false
-ST,STP,Sao Tome and Principe,Rest of world,false
-DE,DEU,Germany,European Union,false
-DM,DMA,Dominica,Rest of world,false
-GE,GEO,Georgia,Rest of world,false
-KR,KOR,"Korea, South",South Korea,false
-SN,SEN,Senegal,Rest of world,false
-MO,MAC,Macao,Rest of world,false
-UA,UKR,Ukraine,Rest of world,false
-TC,TCA,Turks and Caicos Islands,Rest of world,false
-HR,HRV,Croatia,European Union,false
-KG,KGZ,Kyrgyzstan,Rest of world,false
-AZ,AZE,Azerbaijan,Rest of world,false
-SZ,SWZ,Eswatini,Rest of world,false
-JP,JPN,Japan,Japan,false
-GN,GIN,Guinea,Rest of world,false
-AW,ABW,Aruba,Rest of world,false
-ES,ESP,Spain,European Union,false
-BA,BIH,Bosnia and Herzegovina,Rest of world,false
-BS,BHS,Bahamas,Rest of world,false
-CW,CUW,Curaçao,Rest of world,false
-SX,SXM,Sint Maarten (Dutch part),Rest of world,false
-ZW,ZWE,Zimbabwe,Rest of world,false
-BL,BLM,Saint Barthélemy,Rest of world,false
-SB,SLB,Solomon Islands,Rest of world,false
-IO,IOT,British Indian Ocean Territory,Rest of world,false
-WF,WLF,Wallis and Futuna,Rest of world,false
-BB,BRB,Barbados,Rest of world,false
-CO,COL,Colombia,Rest of world,false
-IT,ITA,Italy,European Union,false
-LR,LBR,Liberia,Rest of world,false
-MD,MDA,"Moldova, Republic of",Rest of world,false
-MA,MAR,Morocco,Rest of world,false
-RU,RUS,Russian Federation,Rest of world,false
-NG,NGA,Nigeria,Rest of world,false
-TG,TGO,Togo,Rest of world,false
-MG,MDG,Madagascar,Rest of world,false
-NA,NAM,Namibia,Rest of world,false
-PG,PNG,Papua New Guinea,Rest of world,false
-DJ,DJI,Djibouti,Rest of world,false
-SS,SSD,South Sudan,Rest of world,false
-CX,CXR,Christmas Island,Rest of world,false
+AE,ARE,United Arab Emirates,Rest of world,false
+AF,AFG,Afghanistan,Rest of world,false
+AG,ATG,Antigua and Barbuda,Rest of world,false
+AI,AIA,Anguilla,Rest of world,false
+AL,ALB,Albania,Rest of world,false
+AM,ARM,Armenia,Rest of world,false
+AO,AGO,Angola,Rest of world,false
 AQ,ATA,Antarctica,Rest of world,false
-MX,MEX,Mexico,Mexico,false
-CI,CIV,Côte d'Ivoire,Rest of world,false
-HT,HTI,Haiti,Rest of world,false
-PE,PER,Peru,Rest of world,false
-BH,BHR,Bahrain,Rest of world,false
-YE,YEM,Yemen,Rest of world,false
-GM,GMB,Gambia,Rest of world,false
-BV,BVT,Bouvet Island,Rest of world,false
-PN,PCN,Pitcairn,Rest of world,false
-KI,KIR,Kiribati,Rest of world,false
-EH,ESH,Western Sahara,Rest of world,false
-NU,NIU,Niue,Rest of world,false
-GA,GAB,Gabon,Rest of world,false
-VC,VCT,Saint Vincent and the Grenadines,Rest of world,false
-EG,EGY,Egypt,Rest of world,false
-BD,BGD,Bangladesh,Rest of world,false
-NP,NPL,Nepal,Rest of world,false
-IQ,IRQ,Iraq,Rest of world,false
-RS,SRB,Serbia,Rest of world,false
-MV,MDV,Maldives,Rest of world,false
-UG,UGA,Uganda,Rest of world,false
-ML,MLI,Mali,Rest of world,false
+AR,ARG,Argentina,Rest of world,false
 AS,ASM,American Samoa,Rest of world,false
-KM,COM,Comoros,Rest of world,false
-CK,COK,Cook Islands,Rest of world,false
-CH,CHE,Switzerland,Rest of world,false
-CN,CHN,China,China,false
-CR,CRI,Costa Rica,Rest of world,false
-US,USA,United States of America,United States,true
+AT,AUT,Austria,European Union,false
+AU,AUS,Australia,Rest of world,false
+AW,ABW,Aruba,Rest of world,false
+AZ,AZE,Azerbaijan,Rest of world,false
+BA,BIH,Bosnia and Herzegovina,Rest of world,false
+BB,BRB,Barbados,Rest of world,false
+BD,BGD,Bangladesh,Rest of world,false
+BE,BEL,Belgium,European Union,false
+BF,BFA,Burkina Faso,Rest of world,false
+BG,BGR,Bulgaria,European Union,false
+BH,BHR,Bahrain,Rest of world,false
+BI,BDI,Burundi,Rest of world,false
+BJ,BEN,Benin,Rest of world,false
+BL,BLM,Saint Barthélemy,Rest of world,false
+BM,BMU,Bermuda,Rest of world,false
+BN,BRN,Brunei Darussalam,Rest of world,false
+BO,BOL,Bolivia,Rest of world,false
+BQ,BES,"Bonaire, Sint Eustatius and Saba",Rest of world,false
+BR,BRA,Brazil,Rest of world,false
+BS,BHS,Bahamas,Rest of world,false
+BT,BTN,Bhutan,Rest of world,false
+BV,BVT,Bouvet Island,Rest of world,false
+BW,BWA,Botswana,Rest of world,false
+BY,BLR,Belarus,Rest of world,false
+BZ,BLZ,Belize,Rest of world,false
+CC,CCK,Cocos (Keeling) Islands,Rest of world,false
+CD,COD,"Congo, Democratic Republic of the",Rest of world,false
+CF,CAF,Central African Republic,Rest of world,false
 CG,COG,"Congo, Republic of the",Rest of world,false
+CH,CHE,Switzerland,Rest of world,false
+CI,CIV,Côte d'Ivoire,Rest of world,false
+CK,COK,Cook Islands,Rest of world,false
 CL,CHL,Chile,Rest of world,false
-KN,KNA,Saint Kitts and Nevis,Rest of world,false
-NE,NER,Niger,Rest of world,false
-MY,MYS,Malaysia,Rest of world,false
-RO,ROU,Romania,European Union,false
+CM,CMR,Cameroon,Rest of world,false
+CN,CHN,China,China,false
+CO,COL,Colombia,Rest of world,false
+CR,CRI,Costa Rica,Rest of world,false
+CU,CUB,Cuba,Rest of world,false
+CV,CPV,Cabo Verde,Rest of world,false
+CW,CUW,Curaçao,Rest of world,false
+CX,CXR,Christmas Island,Rest of world,false
+CY,CYP,Cyprus,European Union,false
+CZ,CZE,Czechia,European Union,false
+DE,DEU,Germany,European Union,false
+DJ,DJI,Djibouti,Rest of world,false
+DK,DNK,Denmark,European Union,false
+DM,DMA,Dominica,Rest of world,false
+DO,DOM,Dominican Republic,Rest of world,false
+DZ,DZA,Algeria,Rest of world,false
+EC,ECU,Ecuador,Rest of world,false
+EE,EST,Estonia,European Union,false
+EG,EGY,Egypt,Rest of world,false
+EH,ESH,Western Sahara,Rest of world,false
+ER,ERI,Eritrea,Rest of world,false
+ES,ESP,Spain,European Union,false
+ET,ETH,Ethiopia,Rest of world,false
+FI,FIN,Finland,European Union,false
+FJ,FJI,Fiji,Rest of world,false
+FK,FLK,Falkland Islands (Malvinas),Rest of world,false
+FO,FRO,Faroe Islands,Rest of world,false
+FR,FRA,France,European Union,false
+GA,GAB,Gabon,Rest of world,false
+GB,GBR,United Kingdom,United Kingdom,false
+GD,GRD,Grenada,Rest of world,false
+GE,GEO,Georgia,Rest of world,false
+GH,GHA,Ghana,Rest of world,false
+GI,GIB,Gibraltar,Rest of world,false
+GL,GRL,Greenland,Rest of world,false
+GM,GMB,Gambia,Rest of world,false
+GN,GIN,Guinea,Rest of world,false
+GQ,GNQ,Equatorial Guinea,Rest of world,false
+GR,GRC,Greece,European Union,false
+GT,GTM,Guatemala,Rest of world,false
+GU,GUM,Guam,Rest of world,false
+GW,GNB,Guinea-Bissau,Rest of world,false
+GY,GUY,Guyana,Rest of world,false
+HK,HKG,Hong Kong,Rest of world,false
+HM,HMD,Heard Island and McDonald Islands,Rest of world,false
+HN,HND,Honduras,Rest of world,false
+HR,HRV,Croatia,European Union,false
+HT,HTI,Haiti,Rest of world,false
+HU,HUN,Hungary,European Union,false
+ID,IDN,Indonesia,Rest of world,false
+IE,IRL,Ireland,European Union,false
 IL,ISR,Israel,Rest of world,false
 IN,IND,India,Rest of world,false
-GI,GIB,Gibraltar,Rest of world,false
-RW,RWA,Rwanda,Rest of world,false
-AF,AFG,Afghanistan,Rest of world,false
-NR,NRU,Naoero,Rest of world,false
-BR,BRA,Brazil,Rest of world,false
-TT,TTO,Trinidad and Tobago,Rest of world,false
-ZA,ZAF,South Africa,Rest of world,false
-CU,CUB,Cuba,Rest of world,false
-LU,LUX,Luxembourg,European Union,false
-PA,PAN,Panama,Rest of world,false
-SG,SGP,Singapore,Rest of world,false
-DO,DOM,Dominican Republic,Rest of world,false
-KE,KEN,Kenya,Rest of world,false
-PK,PAK,Pakistan,Rest of world,false
-SY,SYR,Syria,Rest of world,false
-FR,FRA,France,European Union,false
-BJ,BEN,Benin,Rest of world,false
-GD,GRD,Grenada,Rest of world,false
-NZ,NZL,New Zealand,Rest of world,false
-SR,SUR,Suriname,Rest of world,false
-GR,GRC,Greece,European Union,false
-PT,PRT,Portugal,European Union,false
-VE,VEN,Venezuela,Rest of world,false
-TR,TUR,Türkiye,Rest of world,false
-VG,VGB,"Virgin Islands, British",Rest of world,false
-BF,BFA,Burkina Faso,Rest of world,false
-BI,BDI,Burundi,Rest of world,false
-EE,EST,Estonia,European Union,false
-SK,SVK,Slovakia,European Union,false
-SO,SOM,Somalia,Rest of world,false
-TF,ATF,French Southern Territories,Rest of world,false
-TJ,TJK,Tajikistan,Rest of world,false
-AI,AIA,Anguilla,Rest of world,false
-AU,AUS,Australia,Rest of world,false
-CD,COD,"Congo, Democratic Republic of the",Rest of world,false
-KH,KHM,Cambodia,Rest of world,false
-MZ,MOZ,Mozambique,Rest of world,false
-IS,ISL,Iceland,Rest of world,false
-OM,OMN,Oman,Rest of world,false
+IO,IOT,British Indian Ocean Territory,Rest of world,false
+IQ,IRQ,Iraq,Rest of world,false
 IR,IRN,Iran,Rest of world,false
-BZ,BLZ,Belize,Rest of world,false
-NC,NCL,New Caledonia,Rest of world,false
-TM,TKM,Turkmenistan,Rest of world,false
-TL,TLS,Timor-Leste,Rest of world,false
-BT,BTN,Bhutan,Rest of world,false
-GW,GNB,Guinea-Bissau,Rest of world,false
-AT,AUT,Austria,European Union,false
-GT,GTM,Guatemala,Rest of world,false
-PL,POL,Poland,European Union,false
-AG,ATG,Antigua and Barbuda,Rest of world,false
-AL,ALB,Albania,Rest of world,false
-PH,PHL,Philippines,Rest of world,false
-PM,SPM,Saint Pierre and Miquelon,Rest of world,false
-SA,SAU,Saudi Arabia,Rest of world,false
-CM,CMR,Cameroon,Rest of world,false
-PY,PRY,Paraguay,Rest of world,false
-MT,MLT,Malta,European Union,false
-GU,GUM,Guam,Rest of world,false
-FJ,FJI,Fiji,Rest of world,false
-GL,GRL,Greenland,Rest of world,false
-ER,ERI,Eritrea,Rest of world,false
-VU,VUT,Vanuatu,Rest of world,false
-WS,WSM,Samoa,Rest of world,false
-BE,BEL,Belgium,European Union,false
-PF,PYF,French Polynesia,Rest of world,false
-UM,UMI,United States Minor Outlying Islands,Rest of world,false
-DK,DNK,Denmark,European Union,false
+IS,ISL,Iceland,Rest of world,false
+IT,ITA,Italy,European Union,false
+JM,JAM,Jamaica,Rest of world,false
+JO,JOR,Jordan,Rest of world,false
+JP,JPN,Japan,Japan,false
+KE,KEN,Kenya,Rest of world,false
+KG,KGZ,Kyrgyzstan,Rest of world,false
+KH,KHM,Cambodia,Rest of world,false
+KI,KIR,Kiribati,Rest of world,false
+KM,COM,Comoros,Rest of world,false
+KN,KNA,Saint Kitts and Nevis,Rest of world,false
+KP,PRK,"Korea, North",Rest of world,false
+KR,KOR,"Korea, South",South Korea,false
+KW,KWT,Kuwait,Rest of world,false
+KY,CYM,Cayman Islands,Rest of world,false
+KZ,KAZ,Kazakhstan,Rest of world,false
+LA,LAO,Laos,Rest of world,false
+LB,LBN,Lebanon,Rest of world,false
+LC,LCA,Saint Lucia,Rest of world,false
+LK,LKA,Sri Lanka,Rest of world,false
+LR,LBR,Liberia,Rest of world,false
+LS,LSO,Lesotho,Rest of world,false
+LT,LTU,Lithuania,European Union,false
+LU,LUX,Luxembourg,European Union,false
+LV,LVA,Latvia,European Union,false
+LY,LBY,Libya,Rest of world,false
+MA,MAR,Morocco,Rest of world,false
+MD,MDA,"Moldova, Republic of",Rest of world,false
+ME,MNE,Montenegro,Rest of world,false
+MF,MAF,Saint Martin (French part),Rest of world,false
+MG,MDG,Madagascar,Rest of world,false
 MK,MKD,"Macedonia, North",Rest of world,false
-CZ,CZE,Czechia,European Union,false
-QA,QAT,Qatar,Rest of world,false
-FK,FLK,Falkland Islands (Malvinas),Rest of world,false
-HM,HMD,Heard Island and McDonald Islands,Rest of world,false
-TO,TON,Tonga,Rest of world,false
+ML,MLI,Mali,Rest of world,false
+MM,MMR,Myanmar,Rest of world,false
+MN,MNG,Mongolia,Rest of world,false
+MO,MAC,Macao,Rest of world,false
+MR,MRT,Mauritania,Rest of world,false
+MS,MSR,Montserrat,Rest of world,false
+MT,MLT,Malta,European Union,false
+MU,MUS,Mauritius,Rest of world,false
+MV,MDV,Maldives,Rest of world,false
+MW,MWI,Malawi,Rest of world,false
+MX,MEX,Mexico,Mexico,false
+MY,MYS,Malaysia,Rest of world,false
+MZ,MOZ,Mozambique,Rest of world,false
+NA,NAM,Namibia,Rest of world,false
+NC,NCL,New Caledonia,Rest of world,false
+NE,NER,Niger,Rest of world,false
 NF,NFK,Norfolk Island,Rest of world,false
+NG,NGA,Nigeria,Rest of world,false
+NI,NIC,Nicaragua,Rest of world,false
+NL,NLD,Netherlands,European Union,false
+NO,NOR,Norway,Rest of world,false
+NP,NPL,Nepal,Rest of world,false
+NR,NRU,Naoero,Rest of world,false
+NU,NIU,Niue,Rest of world,false
+NZ,NZL,New Zealand,Rest of world,false
+OM,OMN,Oman,Rest of world,false
+PA,PAN,Panama,Rest of world,false
+PE,PER,Peru,Rest of world,false
+PF,PYF,French Polynesia,Rest of world,false
+PG,PNG,Papua New Guinea,Rest of world,false
+PH,PHL,Philippines,Rest of world,false
+PK,PAK,Pakistan,Rest of world,false
+PL,POL,Poland,European Union,false
+PM,SPM,Saint Pierre and Miquelon,Rest of world,false
+PN,PCN,Pitcairn,Rest of world,false
+PT,PRT,Portugal,European Union,false
+PY,PRY,Paraguay,Rest of world,false
+QA,QAT,Qatar,Rest of world,false
+RO,ROU,Romania,European Union,false
+RS,SRB,Serbia,Rest of world,false
+RU,RUS,Russian Federation,Rest of world,false
+RW,RWA,Rwanda,Rest of world,false
+SA,SAU,Saudi Arabia,Rest of world,false
+SB,SLB,Solomon Islands,Rest of world,false
+SC,SYC,Seychelles,Rest of world,false
+SD,SDN,Sudan,Rest of world,false
+SE,SWE,Sweden,European Union,false
+SG,SGP,Singapore,Rest of world,false
+SH,SHN,"Saint Helena, Ascension and Tristan da Cunha",Rest of world,false
+SI,SVN,Slovenia,European Union,false
+SK,SVK,Slovakia,European Union,false
+SL,SLE,Sierra Leone,Rest of world,false
+SN,SEN,Senegal,Rest of world,false
+SO,SOM,Somalia,Rest of world,false
+SR,SUR,Suriname,Rest of world,false
+SS,SSD,South Sudan,Rest of world,false
+ST,STP,Sao Tome and Principe,Rest of world,false
+SV,SLV,El Salvador,Rest of world,false
+SX,SXM,Sint Maarten (Dutch part),Rest of world,false
+SY,SYR,Syria,Rest of world,false
+SZ,SWZ,Eswatini,Rest of world,false
+TC,TCA,Turks and Caicos Islands,Rest of world,false
+TD,TCD,Chad,Rest of world,false
+TF,ATF,French Southern Territories,Rest of world,false
+TG,TGO,Togo,Rest of world,false
+TH,THA,Thailand,Rest of world,false
+TJ,TJK,Tajikistan,Rest of world,false
+TL,TLS,Timor-Leste,Rest of world,false
+TM,TKM,Turkmenistan,Rest of world,false
+TN,TUN,Tunisia,Rest of world,false
+TO,TON,Tonga,Rest of world,false
+TR,TUR,Türkiye,Rest of world,false
+TT,TTO,Trinidad and Tobago,Rest of world,false
+TW,TWN,Taiwan,Rest of world,false
+TZ,TZA,"Tanzania, United Republic of",Rest of world,false
+UA,UKR,Ukraine,Rest of world,false
+UG,UGA,Uganda,Rest of world,false
+UM,UMI,United States Minor Outlying Islands,Rest of world,false
+US,USA,United States of America,United States,true
+UY,URY,Uruguay,Rest of world,false
+UZ,UZB,Uzbekistan,Rest of world,false
+VC,VCT,Saint Vincent and the Grenadines,Rest of world,false
+VE,VEN,Venezuela,Rest of world,false
+VG,VGB,"Virgin Islands, British",Rest of world,false
+VN,VNM,Viet Nam,Rest of world,false
+VU,VUT,Vanuatu,Rest of world,false
+WF,WLF,Wallis and Futuna,Rest of world,false
+WS,WSM,Samoa,Rest of world,false
+YE,YEM,Yemen,Rest of world,false
+ZA,ZAF,South Africa,Rest of world,false
+ZM,ZMB,Zambia,Rest of world,false
+ZW,ZWE,Zimbabwe,Rest of world,false

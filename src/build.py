@@ -146,7 +146,9 @@ def run_sql_files(con: duckdb.DuckDBPyConnection, prefix: str) -> None:
 
 def connect() -> duckdb.DuckDBPyConnection:
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    return duckdb.connect(str(DB_PATH))
+    # One thread: parallel sums add floats in a varying order, which changes the last digits
+    # between runs. A single thread gives identical results for identical data.
+    return duckdb.connect(str(DB_PATH), config={"threads": 1})
 
 
 def main(stage: str) -> None:

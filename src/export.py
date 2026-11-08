@@ -2,6 +2,11 @@
 
 Only marts defined in the current sql/mart_*.sql files are exported, so a table left in the
 database by an older version of the SQL is never published.
+
+Exports are deterministic: marts are built with one thread (src/build.py), floats are rounded
+to 10 decimals (at most 12 significant digits) and rows are sorted by every
+column, left to right (key columns come first in each table). The same data give byte-identical
+files on every run.
 """
 
 import re
@@ -61,8 +66,36 @@ def tableau_waterfall(con) -> None:
                 f"latest share is {ends[5]:.6f}%"
             )
     path = CSV_OUT / "tableau_waterfall.csv"
-    con.execute(f"copy ({TABLEAU_WATERFALL}) to '{path}' (header, delimiter ',')")
+    query = stable_select(con, TABLEAU_WATERFALL).replace("order by all", "order by 1, 2")
+    con.execute(f"copy ({query}) to '{path}' (header, delimiter ',')")
     print(f"  {path.relative_to(CSV_OUT.parent.parent.parent)}")
+
+
+FLOAT_DECIMALS = 10
+SIGNIFICANT_DIGITS = 12
+
+
+def stable_select(con, source: str) -> str:
+    """SELECT over source (a table name or a query) with rounded floats, sorted by all columns."""
+    cols = con.execute(f"describe select * from ({source})").fetchall()
+    exprs = []
+    for name, dtype, *_ in cols:
+        quoted = f'"{name}"'
+        if dtype in ("DOUBLE", "FLOAT") or dtype.startswith("DECIMAL"):
+            # 10 decimals, but never more than 12 significant digits (large CAD values);
+            # "+ 0.0" turns a rounded -0.0 into 0.0.
+            digits = (
+                f"least({FLOAT_DECIMALS}, {SIGNIFICANT_DIGITS - 1} - "
+                f"floor(log10(abs({quoted})))::int)"
+            )
+            exprs.append(
+                f"case when {quoted} is null or {quoted} = 0 or isnan({quoted}) "
+                f"or isinf({quoted}) then {quoted} "
+                f"else round({quoted}, {digits}) + 0.0 end as {quoted}"
+            )
+        else:
+            exprs.append(quoted)
+    return f"select {', '.join(exprs)} from ({source}) order by all"
 
 
 def defined_marts() -> list[str]:
@@ -82,7 +115,7 @@ def main() -> None:
         old.unlink()
     for table in marts + EXTRA_TABLES:
         path = CSV_OUT / f"{table}.csv"
-        con.execute(f"copy {table} to '{path}' (header, delimiter ',')")
+        con.execute(f"copy ({stable_select(con, table)}) to '{path}' (header, delimiter ',')")
         print(f"  {path.relative_to(CSV_OUT.parent.parent.parent)}")
     tableau_waterfall(con)
     con.close()

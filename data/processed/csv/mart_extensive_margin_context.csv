@@ -1,7 +1,7 @@
 kind,description,reference_label,variant,snapshot,n_new_pairs,reference,change_vs_reference
-exploratory,Latest count vs the Dec 2024 snapshot alone (defined after seeing the result),Dec 2024 snapshot,ex_gold,2026-09-01,599,495.0,0.21010101010101012
-exploratory,Latest count vs the Dec 2024 snapshot alone (defined after seeing the result),Dec 2024 snapshot,ex_gold_ex_energy,2026-09-01,592,484.0,0.22314049586776852
-exploratory,Latest count vs the Dec 2024 snapshot alone (defined after seeing the result),Dec 2024 snapshot,total,2026-09-01,605,495.0,0.22222222222222232
-post_hoc,Count at Dec 2025 (same calendar month as the baseline snapshots) vs the frozen baseline mean,baseline mean,ex_gold,2025-12-01,558,505.0,0.10495049504950504
-post_hoc,Count at Dec 2025 (same calendar month as the baseline snapshots) vs the frozen baseline mean,baseline mean,ex_gold_ex_energy,2025-12-01,547,495.5,0.10393541876892032
-post_hoc,Count at Dec 2025 (same calendar month as the baseline snapshots) vs the frozen baseline mean,baseline mean,total,2025-12-01,561,505.5,0.10979228486646875
+exploratory,Latest count vs the Dec 2024 snapshot alone (defined after seeing the result),Dec 2024 snapshot,ex_gold,2026-09-01,599,495.0,0.2101010101
+exploratory,Latest count vs the Dec 2024 snapshot alone (defined after seeing the result),Dec 2024 snapshot,ex_gold_ex_energy,2026-09-01,592,484.0,0.2231404959
+exploratory,Latest count vs the Dec 2024 snapshot alone (defined after seeing the result),Dec 2024 snapshot,total,2026-09-01,605,495.0,0.2222222222
+post_hoc,Count at Dec 2025 (same calendar month as the baseline snapshots) vs the frozen baseline mean,baseline mean,ex_gold,2025-12-01,558,505.0,0.104950495
+post_hoc,Count at Dec 2025 (same calendar month as the baseline snapshots) vs the frozen baseline mean,baseline mean,ex_gold_ex_energy,2025-12-01,547,495.5,0.1039354188
+post_hoc,Count at Dec 2025 (same calendar month as the baseline snapshots) vs the frozen baseline mean,baseline mean,total,2025-12-01,561,505.5,0.1097922849

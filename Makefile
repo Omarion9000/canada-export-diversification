@@ -25,6 +25,7 @@ figures:
 
 notebooks:
 	cd notebooks && ../$(PY) -m nbconvert --to notebook --execute --inplace \
+		--NotebookClient.record_timing=False \
 		01_h1_decomposition.ipynb 02_h2_gold_energy_waterfall.ipynb 03_h3_redirection.ipynb \
 		04_h4_extensive_margin.ipynb 05_sector_exposure.ipynb
 

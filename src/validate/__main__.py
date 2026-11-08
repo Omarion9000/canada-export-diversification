@@ -1,6 +1,5 @@
 """`python -m src.validate`: run V1-V6 on staging tables, write the report, halt on failure."""
 
-import datetime as dt
 
 from src.build import connect
 from src.common import PipelineError
@@ -20,7 +19,7 @@ def main() -> None:
         print(f"  {result.check_id}: {result.status} - {result.summary}")
         results.append(result)
     vintage = con.execute("select p('cimt_vintage')").fetchall()[0][0]
-    report.write(results, vintage, dt.date.today().isoformat())
+    report.write(results, vintage)
     con.close()
     failed = [r.check_id for r in results if r.halting and r.status == "FAIL"]
     if failed:

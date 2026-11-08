@@ -9,12 +9,14 @@ import json
 
 from src.common import (
     LANDING,
+    SOURCE_URLS,
     PipelineError,
     download_date,
     latest_download,
     post_json,
     raw_path,
     register,
+    save_raw,
 )
 
 WDS = "https://www150.statcan.gc.ca/t1/wds/rest"
@@ -134,9 +136,9 @@ def download_all() -> None:
                 f"{WDS}/getDataFromCubePidCoordAndLatestNPeriods", payload
             ), strict=True):
                 series.append({"coordinate": coord, "labels": labels, "response": item})
-        dest.parent.mkdir(parents=True, exist_ok=True)
         dims = [d["dimensionNameEn"] for d in meta["dimension"]]
-        dest.write_text(json.dumps({"productId": pid, "dimensions": dims, "series": series}))
+        content = json.dumps({"productId": pid, "dimensions": dims, "series": series})
+        save_raw(dest, content.encode(), SOURCE_URLS[dest])
 
 
 def land() -> None:

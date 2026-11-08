@@ -54,6 +54,8 @@ def register(path: Path, url: str) -> None:
 def download(url: str, dest: Path, allow_404: bool = False) -> Path | None:
     """Download url to dest once. Existing files are kept as they are (raw is immutable).
 
+    A new download identical to the newest earlier copy is not saved; that copy is used.
+
     Returns None only when allow_404 is True and the server answers 404.
     """
     register(dest, url)
@@ -68,10 +70,37 @@ def download(url: str, dest: Path, allow_404: bool = False) -> Path | None:
         raise PipelineError(f"Download failed: HTTP {response.status_code} for {url}")
     if not response.content:
         raise PipelineError(f"Download returned an empty body: {url}")
+    return save_raw(dest, response.content, url)
+
+
+def save_raw(dest: Path, content: bytes, url: str) -> Path:
+    """Write a new raw file, unless the newest earlier copy has the same bytes.
+
+    Keeping the earlier copy means the vintage only moves when the data change, so a rerun on
+    another day produces identical outputs. Returns the path that holds the content.
+    """
+    previous = previous_download(dest)
+    if previous is not None and previous.read_bytes() == content:
+        SOURCE_URLS.pop(dest, None)
+        register(previous, url)
+        return previous
+    dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(dest.suffix + ".part")
-    tmp.write_bytes(response.content)
+    tmp.write_bytes(content)
     tmp.rename(dest)
+    register(dest, url)
     return dest
+
+
+def previous_download(dest: Path) -> Path | None:
+    """Newest earlier download of the same raw file (same name, older download date)."""
+    stem = re.sub(r"_dl\d{4}-\d{2}-\d{2}$", "", dest.stem)
+    older = [
+        f
+        for f in dest.parent.glob(f"{stem}_dl*{dest.suffix}")
+        if f != dest and download_date(f) < download_date(dest)
+    ]
+    return max(older, key=download_date) if older else None
 
 
 def post_json(url: str, payload) -> object:

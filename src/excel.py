@@ -4,7 +4,10 @@ Every value comes from the marts (through src.analysis) or from docs/sources.md.
 marts (`make excel`).
 """
 
+import datetime as dt
+import io
 import re
+import zipfile
 
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font, PatternFill
@@ -411,8 +414,33 @@ def sources_sheet(wb) -> None:
     ws.freeze_panes = "A2"
 
 
+def save_stable(wb, path, vintage: str) -> None:
+    """Save the workbook with fixed timestamps (document properties and ZIP entries), so the
+    same data give a byte-identical file. Timestamps are set to the data vintage."""
+    stamp = dt.datetime.fromisoformat(vintage)
+    wb.properties.created = stamp
+    buffer = io.BytesIO()
+    wb.save(buffer)  # openpyxl sets "modified" to now; it is reset below.
+    when = f"{vintage}T00:00:00Z"
+    with zipfile.ZipFile(buffer) as src, zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as out:
+        for item in src.infolist():
+            data = src.read(item.filename)
+            if item.filename == "docProps/core.xml":
+                data = re.sub(
+                    rb"(<dcterms:modified[^>]*>)[^<]*(</dcterms:modified>)",
+                    rb"\g<1>" + when.encode() + rb"\g<2>",
+                    data,
+                )
+            info = zipfile.ZipInfo(
+                item.filename, date_time=(stamp.year, stamp.month, stamp.day, 0, 0, 0)
+            )
+            info.compress_type = zipfile.ZIP_DEFLATED
+            out.writestr(info, data)
+
+
 def main() -> None:
     con = analysis.connect()
+    vintage = con.execute("select p('cimt_vintage')").fetchall()[0][0]
     wb = Workbook()
     wb.properties.creator = "Omar Serrano"
     wb.properties.title = "Canada export diversification under US tariffs: analyst pack"
@@ -422,7 +450,7 @@ def main() -> None:
     sources_sheet(wb)
     con.close()
     OUT.parent.mkdir(exist_ok=True)
-    wb.save(OUT)
+    save_stable(wb, OUT, vintage)
     print(f"  {OUT.relative_to(ROOT)}")
 
 

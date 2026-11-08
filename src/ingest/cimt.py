@@ -43,21 +43,29 @@ def download_all(first_month: str) -> None:
 
 
 def zips_for_date(kind: str, date: str) -> list[Path]:
-    found = sorted((RAW / SOURCE).glob(f"{kind.lower()}_*_dl{date}.zip"))
-    if not found:
-        raise PipelineError(f"No CIMT {kind} files for download date {date}")
-    return found
+    """For each year, the newest download on or before date (unchanged years keep the date
+    they were first downloaded). Ordered by year."""
+    by_year: dict[str, Path] = {}
+    for path in (RAW / SOURCE).glob(f"{kind.lower()}_*_dl*.zip"):
+        year = path.name.split("_")[2]
+        if download_date(path) <= date and (
+            year not in by_year or download_date(path) > download_date(by_year[year])
+        ):
+            by_year[year] = path
+    if not by_year:
+        raise PipelineError(f"No CIMT {kind} files on or before download date {date}")
+    return [by_year[y] for y in sorted(by_year)]
 
 
 def latest_date() -> str:
-    dates = {download_date(p) for p in (RAW / SOURCE).glob("dom_exp_*_dl*.zip")}
+    dates = {download_date(p) for p in (RAW / SOURCE).glob("*_exp_*_dl*.zip")}
     if not dates:
         raise PipelineError("No CIMT downloads found. Run `make ingest`.")
     return max(dates)
 
 
 def previous_date(current: str) -> str | None:
-    dates = sorted({download_date(p) for p in (RAW / SOURCE).glob("dom_exp_*_dl*.zip")})
+    dates = sorted({download_date(p) for p in (RAW / SOURCE).glob("*_exp_*_dl*.zip")})
     older = [d for d in dates if d < current]
     return older[-1] if older else None
 
