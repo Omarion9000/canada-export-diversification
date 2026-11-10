@@ -2,6 +2,19 @@
 
 The dashboard reads the CSV files that `make all` writes to `data/processed/csv/` (one file per mart, plus four dimension tables). Every value comes from Statistics Canada CIMT domestic exports (customs basis) unless a field says otherwise. Money is in Canadian dollars (CAD); shares and percent changes are stored as ratios (0.25 = 25%).
 
+## The published dashboard
+
+The workbook `tableau/canada_export_diversification.twbx` is the dashboard on [Tableau Public](https://public.tableau.com/app/profile/omar.serrano/viz/DidCanadareallydiversifyitsexportsawayfromtheUS/Dashboard1) (screenshot: `tableau/screenshots/dashboard.png`). It uses four CSV files, each loaded as an extract packaged inside the `.twbx`:
+
+| Dashboard view | CSV |
+|---|---|
+| Waterfall: gold, energy, everything else | `tableau_waterfall.csv` |
+| US share over time | `mart_us_share.csv` |
+| Redirection by tariffed sector (H3) | `mart_redirection.csv` |
+| Sector exposure (M8) | `mart_exposure.csv` |
+
+The extracts are snapshots of these CSV files. After `make all` changes the data, refresh the extracts in Tableau and save the `.twbx` again. Loose `.hyper` and `.twb` files are not committed.
+
 ## Which CSV feeds which view
 
 | View | CSV | Key fields | Notes |

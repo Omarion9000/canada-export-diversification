@@ -8,6 +8,12 @@
 
 *Baseline 2022–2024 vs the latest 12 months (Oct 2025–Sep 2026). Gold and energy effects are the average of two removal orders.*
 
+## Interactive dashboard
+
+[Open the dashboard on Tableau Public](https://public.tableau.com/app/profile/omar.serrano/viz/DidCanadareallydiversifyitsexportsawayfromtheUS/Dashboard1) (US share over time, the waterfall, redirection by tariffed sector and sector exposure).
+
+![Tableau dashboard: did Canada really diversify its exports away from the US?](tableau/screenshots/dashboard.png)
+
 > Status: all four hypotheses tested (H1–H4) plus the sector exposure table. Data to September 2026.
 
 ## The question
@@ -185,3 +191,7 @@ Every source, with its tier, URL and access date: [docs/sources.md](docs/sources
 
 - **Code:** MIT License, see [LICENSE](LICENSE).
 - **Data:** Statistics Canada data are used under the [Open Government Licence – Canada](https://open.canada.ca/en/open-government-licence-canada) (version 2.0). Source: Statistics Canada. The CSV files in `data/processed/csv/` are derived from these data. Other sources keep their own terms, listed in [docs/sources.md](docs/sources.md).
+
+---
+
+Omar Serrano · Data Analyst · [LinkedIn](https://www.linkedin.com/in/omar-serrano-toronto/)

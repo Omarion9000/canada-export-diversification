@@ -20,3 +20,8 @@ data/processed/*.duckdb.wal
 
 # Landing files are rebuilt by `make ingest` from data/raw
 data/processed/landing/
+
+# Tableau: only the packaged workbook (.twbx) is committed
+*.hyper
+*.twb
+.~*.twbr

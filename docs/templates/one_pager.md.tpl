@@ -1,6 +1,6 @@
 # Canada's exports after the 2025 US tariffs: gold accounts for {gold_share} of the drop in the US share
 
-Omar Serrano · Data Analyst · [GitHub] · [LinkedIn]
+Omar Serrano · Data Analyst · [linkedin.com/in/omar-serrano-toronto](https://www.linkedin.com/in/omar-serrano-toronto/)<br>Code: [github.com/Omarion9000/canada-export-diversification](https://github.com/Omarion9000/canada-export-diversification) · [Interactive dashboard](https://public.tableau.com/app/profile/omar.serrano/viz/DidCanadareallydiversifyitsexportsawayfromtheUS/Dashboard1)
 
 **Data:** Statistics Canada, CIMT domestic exports (customs basis), {first_month}–{last_month}. Baseline 2022–2024 vs the latest 12 months ({tariff_start}–{tariff_end}). Thresholds frozen before the analysis.
 
@@ -14,6 +14,6 @@ Omar Serrano · Data Analyst · [GitHub] · [LinkedIn]
 6. **H4.** {h4_edge} Largest rises vs the baseline: {h4_risers_short}. HS {h4_top_hs2} {h4_top_hs2_short} has the most ({h4_top_hs2_n}).
 7. **Exposure.** {m8_top_cap} depend most on the US; {m8_drop} (CAD {m8_drop_size} bn a year) fell from {m8_drop_base}% to {m8_drop_latest}%.
 
-<img src="../figures/h2_waterfall.png" alt="Waterfall of the change in the US share" width="75%">
+<img src="../figures/h2_waterfall.png" alt="Waterfall of the change in the US share" width="64%">
 
 **How to read this.** Most of the drop is linked to exports elsewhere growing, and gold is {gold_row_growth_share} of that growth. Outside gold, the clearest shifts are in {h3_rejected} and in new {h4_top_hs2_short} pairs. Associations, not proof of cause. **Method:** 12-month sums; front-loading months (Nov 2024–Feb 2025) left out; gold and energy effects average two removal orders (gold {gold_lo_s} to {gold_hi_s} pp); validated against Statistics Canada tables (data of {vintage}).

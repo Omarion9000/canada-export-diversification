@@ -1,6 +1,6 @@
 # Canada's exports after the 2025 US tariffs: gold accounts for 56% of the drop in the US share
 
-Omar Serrano · Data Analyst · [GitHub] · [LinkedIn]
+Omar Serrano · Data Analyst · [linkedin.com/in/omar-serrano-toronto](https://www.linkedin.com/in/omar-serrano-toronto/)<br>Code: [github.com/Omarion9000/canada-export-diversification](https://github.com/Omarion9000/canada-export-diversification) · [Interactive dashboard](https://public.tableau.com/app/profile/omar.serrano/viz/DidCanadareallydiversifyitsexportsawayfromtheUS/Dashboard1)
 
 **Data:** Statistics Canada, CIMT domestic exports (customs basis), January 2022–September 2026. Baseline 2022–2024 vs the latest 12 months (Oct 2025–Sep 2026). Thresholds frozen before the analysis.
 
@@ -14,6 +14,6 @@ Omar Serrano · Data Analyst · [GitHub] · [LinkedIn]
 6. **H4.** Confirmed by the frozen rule, but at the edge (605 vs a limit of 607). The front-loading bias pushes the count down, so this result cannot rule out a moderate rise in new export pairs. Largest rises vs the baseline: the United Kingdom 19 vs 6.5 (1 gold), Spain 18 vs 7.0 (1 gold) and China 31 vs 21.5. HS 84 machinery has the most (176).
 7. **Exposure.** Autos and parts (92%) and steel (89%) depend most on the US; copper (CAD 1.4 bn a year) fell from 97% to 40%.
 
-<img src="../figures/h2_waterfall.png" alt="Waterfall of the change in the US share" width="75%">
+<img src="../figures/h2_waterfall.png" alt="Waterfall of the change in the US share" width="64%">
 
 **How to read this.** Most of the drop is linked to exports elsewhere growing, and gold is 57% of that growth. Outside gold, the clearest shifts are in aluminum and in new machinery pairs. Associations, not proof of cause. **Method:** 12-month sums; front-loading months (Nov 2024–Feb 2025) left out; gold and energy effects average two removal orders (gold −5.4 to −4.1 pp); validated against Statistics Canada tables (data of 2026-11-06).
